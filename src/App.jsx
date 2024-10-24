@@ -3,8 +3,11 @@ import React, { useState, useEffect } from "react";
 import { postJoke } from "./services/jokeService.jsx";
 
 export const App = () => {
-  const [allJokes, setAllJokes] = useState([]); //State for storing jokes
-  const [newJoke, setNewJoke] = useState(""); //State for storing user newJoke input
+  //const [allJokes, setAllJokes] = useState([]); //State for storing jokes
+
+  //??? was I supposed to store jokes using the useState([]) on line 6???
+
+  const [newJoke, setNewJoke] = useState(""); //State for storing user (empty right now) newJoke input
 
   //When you call setNewJoke with event.target.value, you’re updating the newJoke state with whatever the user has currently typed into the input field.
   const handleInputChange = (event) => {
@@ -33,7 +36,13 @@ export const App = () => {
           onChange={handleInputChange} //Calls this function whenever the input changes // Update state on change
         />
       </div>
-      <button type="button" onClick={(event) => postJoke(newJoke)}>
+      <button
+        type="button"
+        onClick={(event) => {
+          postJoke(newJoke);
+          setNewJoke(""); // added to clear input field
+        }}
+      >
         Post New Joke
       </button>
     </>
@@ -42,3 +51,5 @@ export const App = () => {
     //target is not defined -- {postJoke(target.value)}
   );
 };
+
+//callback function-  child component needs to update its parent’s state (to clear input)
