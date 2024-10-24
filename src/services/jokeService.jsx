@@ -26,3 +26,9 @@ export const postJoke = async (jokeText) => {
     console.error("Error posting joke:", error);
   }
 };
+
+export const getAllJokes = async () => {
+  const response = await fetch("http://localhost:8088/jokes");
+  const data = await response.json();
+  return data;
+};
