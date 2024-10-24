@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import { postJoke } from "./services/jokeService.jsx";
+import stevePic from "./assets/steve.png";
 
 export const App = () => {
   //const [allJokes, setAllJokes] = useState([]); //State for storing jokes
@@ -23,13 +24,16 @@ export const App = () => {
   }, [newJoke]); // only runs when newJoke changes
 
   return (
-    <>
-      <div>
+    <div className="app-container">
+      <div className="app-heading">
         <h1>"Hello World!"</h1>
+        <div className="app-heading-circle">
+          <img className="app-logo" src={stevePic} alt="Good job Steve" />
+        </div>
       </div>
-      <div>
+      <div className="joke-add-form">
         <input
-          className=""
+          className="joke-input"
           type="text"
           placeholder="New One Liner"
           value={newJoke} // Bind the input value to the state
@@ -37,6 +41,7 @@ export const App = () => {
         />
       </div>
       <button
+        className="joke-input-submit"
         type="button"
         onClick={(event) => {
           postJoke(newJoke);
@@ -45,11 +50,11 @@ export const App = () => {
       >
         Post New Joke
       </button>
-    </>
-    //so that it happens on event not on page render {(event) =>
-    //an object not a function--{postJoke(newJoke)}(worked? with error)--(setNewJoke)--(newJoke.text)
-    //target is not defined -- {postJoke(target.value)}
+    </div>
   );
 };
 
-//callback function-  child component needs to update its parent’s state (to clear input)
+//so that it happens on event not on page render {(event) =>
+//an object not a function--{postJoke(newJoke)}(worked? with error)--(setNewJoke)--(newJoke.text)
+//target is not defined -- {postJoke(target.value)}
+//callback function- child component needs to update its parent’s state (to clear input)
