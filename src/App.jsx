@@ -33,10 +33,10 @@ export const App = () => {
     setNewJoke(event.target.value);
   }
 
-  // useEffect to log newJoke whenever it changes
-  useEffect(() => {
-    console.log("New joke input changed:", newJoke);
-  }, [newJoke]); // only runs when newJoke changes
+  // useEffect to log newJoke whenever it changes ??? do I need this?
+  // useEffect(() => {
+  //   console.log("New joke input changed:", newJoke);
+  // }, [newJoke]); // only runs when newJoke changes
 
   useEffect(() => {
     const told = allJokes.filter((joke) => joke.told === true);
@@ -44,6 +44,15 @@ export const App = () => {
     setToldJokes(told);
     setUntoldJokes(untold);
   }, [allJokes]); // This runs every time allJokes changes
+
+  const handlePostJoke = async () => {
+    const result = await postJoke(newJoke);
+    if (result) {
+      setUntoldJokes((previousList) => [...previousList, result]); //creating a new array that includes all the jokes from the previousList plus the new joke result at the end. This new array is then set as the new state for untoldJokes ... using the spread operator to pull apart the untoldJokes array then create a new one
+      setToldJokes((previousList) => [...previousList, result]);
+    }
+    setNewJoke("");
+  };
 
   return (
     <div className="app-container">
@@ -67,11 +76,12 @@ export const App = () => {
       <button
         className="joke-input-submit"
         type="button"
-        onClick={(event) => {
-          //so that it happens on event not on page render {(event) =>
-          postJoke(newJoke);
-          setNewJoke(""); // added to clear input field
-        }}
+        onClick={handlePostJoke}
+        // onClick={(event) => {
+        //   //so that it happens on event not on page render {(event) =>
+        //   postJoke(newJoke);
+        //   setNewJoke(""); // added to clear input field
+        // }}
       >
         Post New Joke
       </button>
