@@ -3,12 +3,12 @@
 
 /* Add your own colors here */
 :root {
-  --col-0: #fbabb7;
-  --col-1: #f391a0;
+  --col-0: #ada1f2;
+  --col-1: #228ab0;
   --col-2: #ea3788;
-  --col-3: #b0228c;
+  --col-3: #228ab0;
   --col-4: #282c34;
-  --col-5: #a4eb7c;
+  --col-5: #f1704c;
 }
 
 h1 {
@@ -38,7 +38,7 @@ body {
 
 /* This is the styling for the box. */
 #root {
-  background: #f4f6f9;
+  background: #dfeafa;
   width: 80%;
   border-radius: 4px;
   box-sizing: border-box;
